@@ -1,21 +1,32 @@
 pipeline {
     agent any
-
+    triggers {
+        GenericTrigger (
+            causeString: 'Triggered by develop',
+            genericVariables: [[key: 'ref', value: '$.ref']],
+            printContributedVariables: true,
+            printPostContent: true,
+            regexpFilterExpression: 'refs/heads/' + BRANCH_NAME,
+            regexpFilterText: 'refs/heads/develop',
+            token: 'VXnNT5X/GH8Rs'
+        )
+    }
     stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
+      stage("测试部署") {
+            when {
+                branch 'feature-1'
             }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
+          steps {
+                echo 'develop branch'
+          }
+      }
+      stage("生产部署") {
+            when {
+                branch 'main'
             }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
+          steps {
+                echo 'main branch'
+          }
+      }
     }
 }
