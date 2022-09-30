@@ -1,21 +1,22 @@
 Jenkinsfile (Declarative Pipeline)
 pipeline {
-agent any 
-stages {
-    stage('Build') { 
-        steps {
-            echo "build start" 
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building..'
+            }
         }
-    }
-    stage('Test') { 
-        steps {
-            echo "test start"
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
         }
-    }
-    stage('Deploy') { 
-        steps {
-            echo "deploy start"
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
         }
     }
 }
-} 
